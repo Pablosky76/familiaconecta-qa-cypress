@@ -28,7 +28,7 @@ En otra terminal ejecuta `npm run cypress:smoke` para la selección rápida, `np
 
 Las pruebas comprueban estados visibles, pero no demuestran seguridad real, protección de datos, mensajería, persistencia, restauración ni concurrencia entre dispositivos. La demo no comparte cambios ni datos entre navegadores. Para probar la primera aceptación concurrente se necesita un entorno aislado con servidor y base de datos reales. No ejecutar contra datos familiares.
 
-GitHub Actions ejecuta la batería y conserva capturas de fallos durante siete días. La [ejecución verificada](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44304590302) pasó los 16 casos; la ejecución inicial falló durante el arranque de la demo y se corrigió.
+GitHub Actions ejecuta la batería y conserva capturas de fallos durante siete días. La [ejecución verificada](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44318554318) pasó los 50 casos; la ejecución inicial falló durante el arranque de la demo y se corrigió.
 
 ## Inventario de casos
 

@@ -13,7 +13,7 @@ La batería se organiza por acceso a la demo, respuestas de abuelos, planificaci
 - **SOL-03:** una recarga restablece los datos ficticios; la demo no ofrece persistencia compartida.
 
 ## Evidencia verificada
-El 18 de noviembre de 2026 la regresión local ampliada ejecutó **50 casos y 50 pasaron**, con Cypress 15.21.2, Electron sin interfaz y Node 25.8.1. La selección rápida ejecutó 8 casos y los 8 pasaron en una ejecución local anterior ese mismo día. La [ejecución en GitHub Actions](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44304590302) posterior pasó los 16 casos en Ubuntu con Node 22. La primera ejecución falló durante el arranque; se corrigió y el historial conserva ambos resultados.
+El 18 de noviembre de 2026 la regresión local ampliada ejecutó **50 casos y 50 pasaron**, con Cypress 15.21.2, Electron sin interfaz y Node 25.8.1. La selección rápida ejecutó 8 casos y los 8 pasaron en una ejecución local anterior ese mismo día. La [ejecución ampliada en GitHub Actions](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44318554318) pasó 50 casos en Ubuntu con Node 22. La primera ejecución falló durante el arranque; se corrigió y el historial conserva ambos resultados.
 
 ## Límites y trabajo pendiente
 Las 28 comprobaciones de lógica anteriores y seis comprobaciones de rutas se han trasladado a Cypress. Las seis rutas se verifican ahora mediante navegación real; los casos de reglas siguen siendo pruebas de lógica simulada. Consulta la [matriz de migración](cypress/MIGRACION-COBERTURA.md).
