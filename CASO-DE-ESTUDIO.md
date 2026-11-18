@@ -16,6 +16,7 @@ La batería se organiza por acceso a la demo, respuestas de abuelos, planificaci
 El 18 de noviembre de 2026 la regresión local ejecutó **16 casos y 16 pasaron**, con Cypress 15.21.2, Electron sin interfaz y Node 25.8.1. La selección rápida ejecutó 8 casos y los 8 pasaron en una ejecución local anterior ese mismo día. La [ejecución en GitHub Actions](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44304590302) posterior pasó los 16 casos en Ubuntu con Node 22. La primera ejecución falló durante el arranque; se corrigió y el historial conserva ambos resultados.
 
 ## Límites y trabajo pendiente
+La batería Cypress todavía no sustituye toda la cobertura de lógica que existía en la copia de desarrollo; queda pendiente revisar y trasladar escenarios relevantes.
 La selección de perfiles no autentica ni protege datos. Quedan pendientes pruebas de identidad y permisos, persistencia, envío real de avisos, restauración de copias y aceptación simultánea contra un backend aislado. La prueba móvil cubre un tamaño de pantalla y no sustituye pruebas con usuarios ni una auditoría de accesibilidad. No deben utilizarse datos familiares en el proyecto público de pruebas.
 
 ## Para explicar en una entrevista
