@@ -16,12 +16,21 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Iniciar la demo y esperar a que responda
+        run: |
+          npm run dev -- --host 127.0.0.1 --port 4194 --strictPort > /tmp/familiaconecta-demo.log 2>&1 &
+          for attempt in {1..60}; do
+            if curl --noproxy '*' --fail --silent http://127.0.0.1:4194/ > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/familiaconecta-demo.log
+          exit 1
       - name: Ejecutar Cypress con la demo local
         uses: cypress-io/github-action@v6
         with:
-          start: npm run dev -- --host 127.0.0.1 --port 4194 --strictPort
-          wait-on: 'http://127.0.0.1:4194/'
-          wait-on-timeout: 120
+          install: false
       - name: Guardar capturas de fallos
         if: failure()
         uses: actions/upload-artifact@v4
