@@ -1,0 +1,22 @@
+import { useState } from "react";
+import type { FamilySnapshot } from "@/data";
+import { childTimeline, type TimelineState } from "@/domain/timeline";
+import { addDays, formatDayFull, formatTime } from "@/domain/dates";
+
+const colors: Record<TimelineState,string> = {centro:"bg-sky-200 text-sky-950 border-sky-400 dark:bg-sky-900 dark:text-sky-100",confirmada:"bg-emerald-200 text-emerald-950 border-emerald-400 dark:bg-emerald-900 dark:text-emerald-100",pendiente:"bg-amber-200 text-amber-950 border-amber-500 dark:bg-amber-900 dark:text-amber-100",sin_asignar:"bg-orange-200 text-orange-950 border-orange-500 dark:bg-orange-900 dark:text-orange-100",requiere_atencion:"bg-rose-200 text-rose-950 border-rose-500 dark:bg-rose-900 dark:text-rose-100",sin_datos:"bg-muted text-foreground border-border"};
+const clock=(n:number)=>n===1440?"24:00":formatTime(n);
+export function ChildrenTimeline({snap}: {snap: FamilySnapshot}) {
+ const [date,setDate]=useState(snap.clock.today);
+ return <section className="rounded-2xl border-2 border-primary/30 bg-card p-4 shadow-card sm:p-6" aria-labelledby="timeline-title">
+  <div className="flex flex-wrap items-start justify-between gap-2"><div><p className="text-sm font-bold uppercase tracking-wide text-primary">Vista familiar · planificación</p><h2 id="timeline-title" className="text-2xl font-bold sm:text-3xl">¿Con quién está cada niño?</h2></div><p className="font-bold" aria-live="polite">{formatDayFull(date)}</p></div>
+  <p className="mt-2 text-sm text-muted-foreground">Información prevista, no ubicación en tiempo real. Fecha y hora de la demo simuladas.</p>
+  <div className="mt-5 space-y-6">{snap.children.map(child=>{const segments=childTimeline(snap,child.id,date);const now=date===snap.clock.today?segments.find(s=>s.start<=snap.clock.nowMinutes&&s.end>snap.clock.nowMinutes):undefined; return <article key={child.id} aria-labelledby={`time-${child.id}`} className="rounded-xl border bg-background p-4">
+    <div className="flex flex-wrap items-baseline justify-between gap-1"><h3 id={`time-${child.id}`} className="text-2xl font-bold">{child.name}</h3>{now&&<p className="text-base"><strong>A las {formatTime(snap.clock.nowMinutes)}:</strong> {now.label}</p>}</div>
+    <div aria-hidden="true" className="mt-3 flex h-6 overflow-hidden rounded-full border border-border">{segments.map((s,i)=><div key={i} title={`${clock(s.start)}–${clock(s.end)} ${s.label}`} className={`${colors[s.state]} border-r`} style={{width:`${(s.end-s.start)/1440*100}%`}} />)}</div>
+    <div aria-hidden="true" className="mt-1 flex justify-between text-xs font-semibold text-muted-foreground"><span>00:00</span><span>06:00</span><span>12:00</span><span>18:00</span><span>24:00</span></div>
+   </article>})}</div>
+  <details className="mt-4 rounded-xl border bg-background p-4"><summary className="min-h-11 cursor-pointer font-bold">Ver horas y detalles de cada niño</summary><div className="space-y-4">{snap.children.map(child=><div key={child.id}><h3 className="font-bold">{child.name}</h3><ol aria-label={`Plan del día de ${child.name}`} className="mt-2 flex flex-wrap gap-2">{childTimeline(snap,child.id,date).map((s,i)=><li key={`${s.start}-${i}`} className={`rounded-lg border px-3 py-2 text-sm ${colors[s.state]}`}><span className="font-bold tabular-nums">{clock(s.start)}–{clock(s.end)}</span><span> · {s.label}</span>{s.state==="confirmada"&&<span> · Confirmado</span>}{s.state==="centro"&&<span> · Horario escolar</span>}</li>)}</ol></div>)}</div></details>
+  <div className="mt-5 flex flex-wrap items-end gap-2"><button type="button" className="min-h-11 rounded-lg border bg-background px-4 font-semibold" onClick={()=>setDate(addDays(date,-1))}>Día anterior</button><label className="font-semibold">Fecha <input className="min-h-11 rounded-lg border bg-background px-3" type="date" value={date} onChange={e=>{if(e.target.value)setDate(e.target.value)}} /></label><button type="button" className="min-h-11 rounded-lg border bg-background px-4 font-semibold" onClick={()=>setDate(addDays(date,1))}>Día siguiente</button>{date!==snap.clock.today&&<button type="button" className="min-h-11 rounded-lg border bg-background px-4 font-semibold" onClick={()=>setDate(snap.clock.today)}>Hoy de la demo</button>}</div>
+  <p className="mt-3 text-sm text-muted-foreground">Los periodos grises indican que no hay información registrada. Una solicitud pendiente no es cuidado confirmado. Aún no se calculan nuevas necesidades automáticamente.</p>
+ </section>;
+}

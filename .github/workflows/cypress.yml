@@ -1,0 +1,32 @@
+name: Cypress · FamiliaConecta demo
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  e2e:
+    name: Navegación y cuidados ficticios
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Ejecutar Cypress con la demo local
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run dev -- --host 127.0.0.1 --port 4194 --strictPort
+          wait-on: 'http://127.0.0.1:4194/'
+          wait-on-timeout: 120
+      - name: Guardar capturas de fallos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-capturas-fallos
+          path: cypress/screenshots
+          if-no-files-found: ignore
+          retention-days: 7
