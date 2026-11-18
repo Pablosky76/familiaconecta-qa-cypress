@@ -7,7 +7,7 @@ Proyecto de demostración de QA para una aplicación que ayuda a coordinar cuida
 - [Inventario y ejecución de las pruebas](cypress/README.md): casos con identificadores, categorías y límites.
 - [Caso de estudio](CASO-DE-ESTUDIO.md): riesgos, decisiones y ejemplos para explicar en una entrevista.
 - [Pruebas Cypress](cypress/e2e): escenarios de acceso, respuestas, planificación, móvil y calendario.
-- [Flujo de GitHub Actions](.github/workflows): configuración preparada; no se considera verificada hasta observar una ejecución real en GitHub.
+- [Flujo de GitHub Actions](.github/workflows): configuración verificada en una ejecución real de GitHub.
 
 La demo incluida es una **instantánea local para pruebas**, no una aplicación conectada a datos reales. El selector de perfiles no autentica usuarios; los cambios se pierden al recargar. No se deben introducir datos de personas reales.
 
@@ -32,4 +32,4 @@ Los casos smoke forman parte de la regresión y no se cuentan dos veces. Las pru
 
 ## Alcance
 
-La ejecución local documentada el 18 de noviembre de 2026 comprende 16 pruebas Cypress aprobadas. La cifra describe esa ejecución y puede cambiar al evolucionar el código. Las pruebas no acreditan acceso privado, persistencia, copias, avisos reales, concurrencia entre dispositivos ni conformidad de accesibilidad: son trabajos pendientes que requieren un entorno y evaluaciones adecuados.
+La ejecución local documentada el 18 de noviembre de 2026 comprende 16 pruebas Cypress aprobadas. En la [ejecución de GitHub Actions](https://github.com/Pablosky76/familiaconecta-qa-cypress/actions/runs/44304590302) del mismo día pasaron también las 16 pruebas. La cifra describe esa ejecución y puede cambiar al evolucionar el código. Las pruebas no acreditan acceso privado, persistencia, copias, avisos reales, concurrencia entre dispositivos ni conformidad de accesibilidad: son trabajos pendientes que requieren un entorno y evaluaciones adecuados.
