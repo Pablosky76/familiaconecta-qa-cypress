@@ -11,6 +11,8 @@ Batería E2E para la **demo local con datos ficticios**. El objetivo es comproba
 | `03_planificacion` | Petición de ayuda y validación de horas. |
 | `04_accesibilidad` | Controles visibles y ausencia de desbordamiento en un tamaño móvil. No es una auditoría completa de accesibilidad. |
 | `05_calendario` | Leyenda de estados y navegación semanal para los abuelos. |
+| `06_reglas` | Pruebas de lógica de dominio y repositorio simulado, ejecutadas por Cypress en el navegador. |
+| `07_rutas` | Acceso directo a seis rutas de la demo. |
 
 ## Ejecutar localmente
 
@@ -49,6 +51,10 @@ GitHub Actions ejecuta la batería y conserva capturas de fallos durante siete d
 | CAL-02 | El calendario permite cambiar de semana y volver a la demo. |
 | MOV-01 | Los controles principales se muestran en móvil sin desbordamiento horizontal. |
 
+## Casos de reglas y rutas
+
+Los casos REG-01 a REG-28 comprueban lógica y datos simulados directamente; los casos RUT-01 a RUT-06 abren las rutas en el navegador. Consulta la [matriz de migración](MIGRACION-COBERTURA.md) para ver cada correspondencia. Los casos de reglas usan módulos servidos por Vite en la demo local y no prueban un backend real.
+
 ## Resultado local
 
-El 18 de noviembre de 2026 se ejecutaron los siete archivos con Cypress 15.21.2, Electron en modo sin interfaz y Node 25.8.1: **16 pruebas de regresión aprobadas, 0 fallidas**. La selección rápida ejecutó 8 de esas mismas pruebas y también terminó sin fallos. Es un resultado local de esta demo, no una ejecución en GitHub ni una certificación de seguridad o accesibilidad.
+El 18 de noviembre de 2026 se ejecutaron los 14 archivos con Cypress 15.21.2, Electron en modo sin interfaz y Node 25.8.1: **50 pruebas de regresión aprobadas, 0 fallidas** (22 de interfaz y 28 de reglas simuladas). La selección rápida ejecutó 8 de esas mismas pruebas y también terminó sin fallos. Es un resultado local de esta versión ampliada, no una certificación de seguridad o accesibilidad.
